@@ -1,6 +1,6 @@
 let selectedPlumberName = ""; 
 
-// १. प्रीलोडर
+
 window.addEventListener('load', () => {
     const preloader = document.getElementById('preloader');
     if(preloader) {
@@ -9,7 +9,7 @@ window.addEventListener('load', () => {
     }
 });
 
-// २. प्लंबर्सची यादी दाखवणे (From Database)
+
 async function showPlumbers(serviceName) {
     document.getElementById('serviceTitle').innerText = serviceName;
     const response = await fetch('http://localhost:3000/api/plumbers');
@@ -41,7 +41,7 @@ function openBookingForm(name) {
     document.getElementById('bookingTitle').innerText = "बुकिंग: " + name;
 }
 
-// ३. बुकिंग सबमिट करणे
+
 async function submitBooking(event) {
     event.preventDefault();
     const bookingData = {
@@ -61,7 +61,7 @@ async function submitBooking(event) {
     }
 }
 
-// ४. मोडाल्स आणि लॉगिन
+
 function openLoginModal() { document.getElementById('loginModal').classList.remove('hidden'); }
 function closeLoginModal() { document.getElementById('loginModal').classList.add('hidden'); }
 function closeModal() { document.getElementById('plumberModal').classList.add('hidden'); }
@@ -74,7 +74,7 @@ function checkLogin(event) {
     } else { alert("Wrong Password!"); }
 }
 
-// ५. स्क्रोल रिव्हील
+
 function reveal() {
     var reveals = document.querySelectorAll(".reveal");
     for (var i = 0; i < reveals.length; i++) {
