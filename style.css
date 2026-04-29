@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;900&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Preloader */
+#preloader {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: #0a0f1e; display: flex; align-items: center; justify-content: center; z-index: 9999;
+    transition: opacity 0.5s, visibility 0.5s;
+}
+.loader {
+    width: 50px; height: 50px; border: 5px solid #11162d; border-top-color: #3b82f6;
+    border-radius: 50%; animation: spin 1s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Neon Glocks for Background */
+.purple-glow { width: 500px; height: 500px; background: rgba(168, 85, 247, 0.15); border-radius: 50%; filter: blur(100px); }
+.blue-glow { width: 500px; height: 500px; background: rgba(37, 99, 235, 0.15); border-radius: 50%; filter: blur(100px); }
+
+/* Neon Text */
+.neon-text { text-shadow: 0 0 10px rgba(255,255,255,0.5), 0 0 20px rgba(168, 85, 247, 0.5); }
+.neon-text-blue { text-shadow: 0 0 15px rgba(37, 99, 235, 0.7); }
+.neon-text-purple { text-shadow: 0 0 15px rgba(168, 85, 247, 0.7); }
+.neon-text-white { text-shadow: 0 0 15px rgba(255, 255, 255, 0.5); }
+
+/* Buttons */
+.admin-neon-btn {
+    border: 2px solid #a855f7; color: #a855f7; padding: 8px 25px; border-radius: 50px;
+    font-size: 12px; font-weight: bold; transition: 0.3s;
+    box-shadow: 0 0 10px rgba(168, 85, 247, 0.3);
+}
+.admin-neon-btn:hover { background: #a855f7; color: white; box-shadow: 0 0 20px rgba(168, 85, 247, 0.6); }
+
+.hero-btn-blue {
+    background: #3b82f6; color: white; padding: 16px 40px; border-radius: 50px; font-weight: bold;
+    box-shadow: 0 0 20px rgba(37, 99, 235, 0.5); transition: 0.3s;
+}
+.hero-btn-blue:hover { box-shadow: 0 0 30px rgba(37, 99, 235, 0.8); transform: translateY(-3px); }
+
+.hero-btn-green {
+    border: 2px solid #22c55e; color: #22c55e; padding: 14px 40px; border-radius: 50px; font-weight: bold;
+    transition: 0.3s;
+}
+.hero-btn-green:hover { background: #22c55e; color: white; box-shadow: 0 0 20px rgba(34, 197, 94, 0.5); transform: translateY(-3px); }
+
+/* Service Box Neon */
+.service-box-neon {
+    background: #11162d; border: 2px solid transparent; padding: 35px 25px; border-radius: 25px;
+    text-align: left; transition: all 0.4s ease-out; cursor: pointer;
+}
+.service-box-neon:hover {
+    background: #0d1226; transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+}
+
+.icon-style { font-size: 2rem; margin-bottom: 20px; display: block; }
+
+/* Icon Shadow on Hover */
+.service-box-neon:hover .shadow-blue { filter: drop-shadow(0 0 10px rgba(37,99,235,1)); }
+.service-box-neon:hover .shadow-purple { filter: drop-shadow(0 0 10px rgba(168,85,247,1)); }
+.service-box-neon:hover .shadow-pink { filter: drop-shadow(0 0 10px rgba(236,72,153,1)); }
+.service-box-neon:hover .shadow-green { filter: drop-shadow(0 0 10px rgba(34,197,94,1)); }
+
+/* Input Neon */
+.input-neon {
+    width: 100%; background: #0a0f1e; border: 2px solid #1a2036; padding: 15px 20px;
+    border-radius: 12px; color: white; outline: none; transition: 0.3s;
+}
+.input-neon:focus { border-color: #3b82f6; box-shadow: 0 0 15px rgba(37,99,235,0.3); }
+
+/* Plumber Card in Modal */
+.p-card { background: #0d1226; border: 2px solid #1a2036; border-radius: 20px; padding: 20px; transition: 0.3s; }
+.p-card:hover { border-color: #a855f7; box-shadow: 0 0 20px rgba(168,85,247,0.2); }
+.p-img { width: 70px; height: 70px; border-radius: 50%; object-fit: cover; margin-bottom: 15px; border: 2px solid #222; }
+
+/* Scroll Reveal Animation */
+.reveal { position: relative; transform: translateY(50px); opacity: 0; transition: all 0.8s ease-out; }
+.reveal.active { transform: translateY(0); opacity: 1; }
+
+/* Nav link underline animation */
+.nav-link { position: relative; }
+.nav-link::after {
+    content: ''; position: absolute; width: 0; height: 2px; bottom: -5px; left: 0;
+    background: #3b82f6; transition: width 0.3s;
+}
+.nav-link:hover::after { width: 100%; }
