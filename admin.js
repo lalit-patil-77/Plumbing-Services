@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // १. बुकिंग्स लोड करणे
 async function loadBookings() {
     try {
-        const response = await fetch('http://localhost:3000/api/admin/bookings');
+        const response = await fetch('/api/admin/bookings');
         const bookings = await response.json();
         const tableBody = document.getElementById('bookingTable');
         if(!tableBody) return;
