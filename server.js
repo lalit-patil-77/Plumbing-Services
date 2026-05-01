@@ -32,6 +32,10 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
+app.get('/admin.html', (req, res) => {
+  res.sendFile(path.join(__dirname, 'admin.html'));
+});
+
 // Fetch plumbers
 app.get('/api/plumbers', (req, res) => {
   db.query('SELECT * FROM plumbers', (err, results) => {
