@@ -10,44 +10,76 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(express.static(__dirname));
 
-// MySQL Connection
+// Railway DB connection
 const db = mysql.createConnection({
-    host: 'YOUR_DB_HOST',
-    user: 'YOUR_DB_USER',
-    password: 'YOUR_DB_PASSWORD',
-    database: 'YOUR_DB_NAME'
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+  port: process.env.DB_PORT
 });
 
-db.connect(err => {
-    if (err) {
-        console.error(err);
-        return;
-    }
-    console.log('DB Connected');
+db.connect((err) => {
+  if (err) {
+    console.error('Database connection failed:', err);
+    return;
+  }
+  console.log('Database connected successfully');
 });
 
+// Home page
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
+  res.sendFile(path.join(__dirname, 'index.html'));
 });
 
+// Fetch plumbers
 app.get('/api/plumbers', (req, res) => {
-    db.query('SELECT * FROM plumbers', (err, result) => {
-        if (err) return res.status(500).send(err);
-        res.send(result);
-    });
+  db.query('SELECT * FROM plumbers', (err, results) => {
+    if (err) return res.status(500).send(err);
+    res.json(results);
+  });
 });
 
+// Create booking
 app.post('/api/book', (req, res) => {
-    const { custName, custMobile, custAddress, plumberName } = req.body;
+  const { custName, custMobile, custAddress, plumberName } = req.body;
 
-    const sql = `INSERT INTO bookings 
-    (custName, custMobile, custAddress, plumberName) 
-    VALUES (?, ?, ?, ?)`;
+  const sql = `
+    INSERT INTO bookings
+    (custName, custMobile, custAddress, plumberName)
+    VALUES (?, ?, ?, ?)
+  `;
 
-    db.query(sql, [custName, custMobile, custAddress, plumberName], (err, result) => {
-        if (err) return res.status(500).send(err);
-        res.send({ message: 'Success' });
+  db.query(sql, [custName, custMobile, custAddress, plumberName], (err, result) => {
+    if (err) return res.status(500).send(err);
+
+    res.json({
+      message: 'Success',
+      id: result.insertId
     });
+  });
+});
+
+// Admin bookings
+app.get('/api/admin/bookings', (req, res) => {
+  db.query('SELECT * FROM bookings ORDER BY id DESC', (err, results) => {
+    if (err) return res.status(500).send(err);
+    res.json(results);
+  });
+});
+
+// Update plumber status
+app.post('/api/admin/update-status', (req, res) => {
+  const { name, status } = req.body;
+
+  db.query(
+    'UPDATE plumbers SET status = ? WHERE name = ?',
+    [status, name],
+    (err) => {
+      if (err) return res.status(500).send(err);
+      res.json({ message: 'Updated' });
+    }
+  );
 });
 
 module.exports = app;
