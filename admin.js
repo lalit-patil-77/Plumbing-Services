@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     loadPlumbers();
 });
 
-// १. बुकिंग्स लोड करणे
+
 async function loadBookings() {
     try {
         const response = await fetch('/api/admin/bookings');
@@ -25,10 +25,9 @@ async function loadBookings() {
     } catch (e) { console.error("Error:", e); }
 }
 
-// २. प्लंबर्स लोड करणे
 async function loadPlumbers() {
     try {
-        const response = await fetch('http://localhost:3000/api/plumbers');
+        const response = await fetch('/api/plumbers');
         const data = await response.json();
         const grid = document.getElementById('plumberGrid');
         if(!grid) return;
@@ -53,10 +52,10 @@ async function loadPlumbers() {
     } catch (e) { console.error("Error:", e); }
 }
 
-// ३. स्टेटस अपडेट करणे
+
 async function updateStatus(name, newStatus) {
     if (!newStatus) return;
-    const response = await fetch('http://localhost:3000/api/admin/update-status', {
+    const response = await fetch('/api/admin/update-status', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, status: newStatus })
